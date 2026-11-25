@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Monthly Website Maintenance Checklist</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+    h1 {
+      font-size: 22px;
+    }
+    .item {
+      margin: 8px 0;
+    }
+    .done {
+      text-decoration: line-through;
+      color: gray;
+    }
+    button {
+      margin-top: 15px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Monthly Website Maintenance Checklist</h1>
+  <p id="status">0 of 5 tasks completed</p>
+
+  <div class="item">
+    <input type="checkbox" id="t1" onchange="updateStatus()">
+    <label for="t1">Check for broken links</label>
+  </div>
+
+  <div class="item">
+    <input type="checkbox" id="t2" onchange="updateStatus()">
+    <label for="t2">Update outdated content</label>
+  </div>
+
+  <div class="item">
+    <input type="checkbox" id="t3" onchange="updateStatus()">
+    <label for="t3">Test contact forms</label>
+  </div>
+
+  <div class="item">
+    <input type="checkbox" id="t4" onchange="updateStatus()">
+    <label for="t4">Review website analytics</label>
+  </div>
+
+  <div class="item">
+    <input type="checkbox" id="t5" onchange="updateStatus()">
+    <label for="t5">Check backups and updates</label>
+  </div>
+
+  <button onclick="resetList()">Reset</button>
+
+  <script>
+    function updateStatus() {
+      let boxes = document.querySelectorAll('input[type="checkbox"]');
+      let checked = 0;
+
+      for (let i = 0; i < boxes.length; i++) {
+        let label = document.querySelector('label[for="' + boxes[i].id + '"]');
+        if (boxes[i].checked) {
+          checked++;
+          label.classList.add("done");
+        } else {
+          label.classList.remove("done");
+        }
+      }
+
+      document.getElementById("status").innerText =
+        checked + " of " + boxes.length + " tasks completed";
+    }
+
+    function resetList() {
+      let boxes = document.querySelectorAll('input[type="checkbox"]');
+      for (let i = 0; i < boxes.length; i++) {
+        boxes[i].checked = false;
+      }
+      updateStatus();
+    }
+  </script>
+
+</body>
+</html>
